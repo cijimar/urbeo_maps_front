@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';  
+import { Incidencia } from '../../model/Incidencia';
 
 @Injectable({
   providedIn: 'root'
@@ -8,16 +9,16 @@ import { Observable } from 'rxjs';
 
 export class IncidenciasService {
 
-  private apiUrl = 'http://localhost:8080/incidencias';
+  private apiUrl = 'http://localhost:8080/api/incidencias';
 
   constructor(private http: HttpClient) {}
 
-  obtenerIncidencias(): Observable<any> {
-    return this.http.get(this.apiUrl);
+  obtenerIncidencias(): Observable<Incidencia[]> {
+    return this.http.get<Incidencia[]>(this.apiUrl);
   }
 
-  crearIncidencia(incidencia: any): Observable<any> {
-    return this.http.post(this.apiUrl, incidencia);
-  }
+  //crearIncidencia(incidencia: Incidencia): Observable<Incidencia> {
+  //  return this.http.post<Incidencia>(this.apiUrl, incidencia);
+  //}
 
 }
