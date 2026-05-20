@@ -1,5 +1,5 @@
 export interface Incidencia {
-  id: number;
+  id?: number;
   titulo: string;
   descripcion: string;
   latitud: number;

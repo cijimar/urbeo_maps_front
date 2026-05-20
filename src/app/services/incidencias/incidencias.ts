@@ -17,8 +17,8 @@ export class IncidenciasService {
     return this.http.get<Incidencia[]>(this.apiUrl);
   }
 
-  //crearIncidencia(incidencia: Incidencia): Observable<Incidencia> {
-  //  return this.http.post<Incidencia>(this.apiUrl, incidencia);
-  //}
+  crearIncidencia(incidencia: Incidencia): Observable<Incidencia> {
+    return this.http.post<Incidencia>(this.apiUrl, incidencia);
+  }
 
 }
