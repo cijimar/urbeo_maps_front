@@ -19,3 +19,5 @@ export class IncidenciasService {
   crearIncidencia(incidencia: any): Observable<any> {
     return this.http.post(this.apiUrl, incidencia);
   }
+
+}

@@ -1,42 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import * as L from 'leaflet';
+import { Component, AfterViewInit, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+
+let L: any;
 
 @Component({
   selector: 'app-mapa-incidencias',
-  imports: [],
+  standalone: true,
   templateUrl: './mapa-incidencias.html',
-  styleUrl: './mapa-incidencias.css',
+  styleUrl: './mapa-incidencias.css'
 })
+export class MapaIncidenciasComponent implements AfterViewInit {
 
-export class MapaIncidenciasComponent implements OnInit {
+  private platformId = inject(PLATFORM_ID);
 
-  private map: any;
+  async ngAfterViewInit() {
 
-  ngOnInit(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    // IMPORT DINÁMICO (IMPORTANTE)
+    const leaflet = await import('leaflet');
+    L = leaflet.default;
+
     this.initMap();
   }
 
-  private initMap(): void {
-
-    this.map = L.map('map').setView([37.1882, -3.6067], 13);
+  initMap() {
+    const map = L.map('map').setView([37.1773, -3.5986], 13); // Granada
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: 'OpenStreetMap'
-    }).addTo(this.map);
-
-    this.map.on('click', (e: any) => {
-
-      const lat = e.latlng.lat;
-      const lng = e.latlng.lng;
-
-      console.log('Latitud:', lat);
-      console.log('Longitud:', lng);
-
-      L.marker([lat, lng])
-        .addTo(this.map)
-        .bindPopup('Nueva incidencia')
-        .openPopup();
-    });
+      attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
   }
-
 }
