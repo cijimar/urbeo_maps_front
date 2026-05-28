@@ -4,4 +4,6 @@ export interface Incidencia {
   descripcion: string;
   latitud: number;
   longitud: number;
+  categoria: string;
+  estado: string;
 }
