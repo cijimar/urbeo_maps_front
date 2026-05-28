@@ -1,2 +1,9 @@
 <div id="map"></div>
 
+<app-modal-crear-incidencia
+  [visible]="modalVisible"
+  [latitud]="nuevaLat"
+  [longitud]="nuevaLng"
+  (guardar)="onGuardarIncidencia($event)"
+  (cancelar)="onCancelarModal()">
+</app-modal-crear-incidencia>

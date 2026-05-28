@@ -1,10 +1,35 @@
-<!--!<div class="modal">
-  <h2>Nueva incidencia</h2>
+@if (visible) {
+  <div class="overlay" (click)="cerrar()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <h2>Nueva incidencia</h2>
 
-  <input [(ngModel)]="titulo" placeholder="Título" />
-  <textarea [(ngModel)]="descripcion" placeholder="Descripción"></textarea>
+      <div class="coords">
+        <span>📍 {{ latitud | number:'1.4-4' }}, {{ longitud | number:'1.4-4' }}</span>
+      </div>
 
-  <button (click)="crearIncidencia()">
-    Guardar
-  </button>
-</div>-->
+      <div class="field">
+        <label for="titulo">Título *</label>
+        <input id="titulo" [(ngModel)]="titulo" placeholder="Ej: Farola rota" />
+      </div>
+
+      <div class="field">
+        <label for="categoria">Categoría</label>
+        <select id="categoria" [(ngModel)]="categoria">
+          @for (cat of categorias; track cat) {
+            <option [value]="cat">{{ cat }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" [(ngModel)]="descripcion" placeholder="Describe el problema..." rows="3"></textarea>
+      </div>
+
+      <div class="actions">
+        <button class="btn-cancel" (click)="cerrar()">Cancelar</button>
+        <button class="btn-save" (click)="crearIncidencia()" [disabled]="!titulo.trim()">Guardar</button>
+      </div>
+    </div>
+  </div>
+}
